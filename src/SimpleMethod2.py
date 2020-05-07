@@ -9,7 +9,7 @@ import matplotlib.pyplot as plt
 
 class SimpleMethod2(MainCalculation):
 
-    def calculate(self, image: np.ndarray, mask: np.ndarray) -> np.ndarray:
+    def calculate(self, image: np.ndarray, mask: np.ndarray, **kwargs) -> np.ndarray:
         imshow(image)
         plt.show()
         lap = maximum(minimum(image, disk(8)), disk(5))

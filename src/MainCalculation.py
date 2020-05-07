@@ -5,5 +5,5 @@ import numpy as np
 class MainCalculation(ABC):
 
     @abstractmethod
-    def calculate(self, image: np.ndarray, mask: np.ndarray) -> np.ndarray:
+    def calculate(self, image: np.ndarray, mask: np.ndarray, **kwargs) -> np.ndarray:
         pass

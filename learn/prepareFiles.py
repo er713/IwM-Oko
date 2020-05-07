@@ -5,6 +5,27 @@ import numpy as np
 from src.AlgorithmType import AlgorithmType
 from skimage.io import imread, imsave
 from tqdm import tqdm
+from numba import jit
+
+
+# @jit()
+def read_data():
+    cls = []
+    vals = []
+    with open("data.csv", "r") as f:
+        while f.readable():
+            s = f.readline()
+            if len(s) == 0 or s == "":
+                break
+            if re.search("nan", s) is not None:
+                continue
+            v = s.split(", ")
+            if v[0] != '' and len(v[0]) != 0:
+                cl = int(v[0])
+                val = [float(k) for k in v[1:]]
+                cls.append(cl)
+                vals.append(val)
+    return cls, vals
 
 
 def printProgressBar(iteration, total, prefix='Progress: ', suffix='Complete', decimals=1, length=100, fill='█',

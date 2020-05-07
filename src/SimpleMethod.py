@@ -15,7 +15,7 @@ class SimpleMethod(MainCalculation):
     dużo zakłóceń
     """
 
-    def calculate(self, image: np.ndarray, mask: np.ndarray) -> np.ndarray:
+    def calculate(self, image: np.ndarray, mask: np.ndarray, **kwargs) -> np.ndarray:
         # print(image*255 + 20)
         imshow(image)
         plt.show()

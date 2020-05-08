@@ -2,6 +2,8 @@ from enum import Enum
 
 from src.SimpleMethod import SimpleMethod
 from src.SimpleMethod2 import SimpleMethod2
+from src.Tree import Tree
+from src.KNN import KNN
 
 
 class AlgorithmType(Enum):
@@ -9,6 +11,7 @@ class AlgorithmType(Enum):
     SIMPLE = 1
     KNN = 2
     SIMPLE2 = 3
+    TREE = 4
 
 
 def get_none():
@@ -18,8 +21,9 @@ def get_none():
 __switch = {
     AlgorithmType.NONE: lambda: get_none(),
     AlgorithmType.SIMPLE: lambda: SimpleMethod(),
-    AlgorithmType.KNN: lambda: print("brak"),
-    AlgorithmType.SIMPLE2: lambda: SimpleMethod2()
+    AlgorithmType.KNN: lambda: KNN(),
+    AlgorithmType.SIMPLE2: lambda: SimpleMethod2(),
+    AlgorithmType.TREE: lambda: Tree()
 }
 
 

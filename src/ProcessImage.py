@@ -20,9 +20,9 @@ class ProcessImage:
     def __init__(self, algorithm: AlgorithmType):
         self._mainCalculation = constructor(algorithm)
 
-    def process(self, image: np.ndarray, mask: np.ndarray) -> np.ndarray:
+    def process(self, image: np.ndarray, mask: np.ndarray, **kwargs) -> np.ndarray:
         # print(image)
-        return self._mainCalculation.calculate(image, mask)
+        return self._mainCalculation.calculate(image, mask, **kwargs)
 
     @staticmethod
     # @jit(nopython=True)
@@ -54,7 +54,7 @@ class ProcessImage:
         return exposure.rescale_intensity(im, in_range=(p2, p98))
 
     @staticmethod
-    @jit(nopython=True)
+    # @jit(nopython=True)
     def color_change(image: np.ndarray) -> np.ndarray:
         """
         Zmiana temperatury obrazu na około 3000K (przynajmniej według programu 'darktable',
@@ -88,16 +88,13 @@ class ProcessImage:
         return rgb2gray(image)
 
     @staticmethod
-    def statistics(image: np.ndarray, origin: np.ndarray) -> (float, float, float):
-        cm = confusion_matrix(origin.reshape((origin.shape[0] * origin.shape[1], 1)),
-                              image.reshape((image.shape[0] * image.shape[1], 1)))
-        accuracy = float(cm[0, 0] + cm[1, 1]) / sum(sum(cm))
-        sensitivity = float(cm[0, 0]) / (cm[0, 0] + cm[0, 1])
-        specificity = float(cm[1, 1]) / (cm[1, 0] + cm[1, 1])
-        return accuracy, sensitivity, specificity
-
-    @staticmethod
     def get_mask(image: np.ndarray) -> np.ndarray:
+        """
+
+        :param image: kolorowy obraz
+        :return: tablica booli, True - piksel należy do "ramki"
+        """
+
         # print(image)
         if type(image[0, 0, 0]) == np.uint8:
             # print("do 255")
@@ -107,23 +104,3 @@ class ProcessImage:
     @staticmethod
     def preprocesing(image: np.ndarray) -> np.ndarray:
         return ProcessImage.contrast_change(ProcessImage.to_grayscale(ProcessImage.color_change(image)))
-
-    @staticmethod
-    def get_moments(image: np.ndarray, position: Tuple[int, int]):
-        x, y = position[0], position[1]
-        d = 5
-        part = image[x - d:x + d + 1, y - d:y + d + 1]
-        h = moments_hu(part)
-        # print(h)
-        c = moments_central(part, order=4)
-        # print(c)
-        return *(c.reshape((25, 1))), *h
-
-    @staticmethod
-    def get_color_var(image: np.ndarray, position: Tuple[int, int]) -> (float, float, float):
-        x, y = position[0], position[1]
-        d = 5
-        part = image[x - d:x + d + 1, y - d:y + d + 1, :]
-        r, g, b = part[:, :, 0], part[:, :, 1], part[:, :, 2]
-        vr, vg, vb = np.var(r), np.var(g), np.var(b)
-        return vr, vg, vb

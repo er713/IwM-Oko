@@ -1,4 +1,4 @@
-from MainCalculation import MainCalculation
+from src.MainCalculation import MainCalculation
 import numpy as np
 from skimage.filters.rank import otsu, minimum, maximum
 from skimage.morphology import disk

@@ -1,5 +1,5 @@
-from MainCalculation import MainCalculation
-from AlgorithmType import AlgorithmType, constructor
+from src.MainCalculation import MainCalculation
+from src.AlgorithmType import AlgorithmType, constructor
 from PIL import Image, ImageEnhance
 import matplotlib.pyplot as plt
 from numba import jit

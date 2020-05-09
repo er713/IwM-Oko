@@ -1,5 +1,5 @@
 import numpy as np
-from MainCalculation import MainCalculation
+from src.MainCalculation import MainCalculation
 from skimage.filters import laplace, meijering, sato
 from skimage.io import imshow
 from skimage.filters.rank import maximum, minimum

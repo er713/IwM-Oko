@@ -4,9 +4,9 @@ from skimage.morphology import disk
 from skimage.transform import rescale, resize
 from skimage.filters import gaussian
 from skimage.filters.rank import minimum, maximum
-from MainCalculation import MainCalculation
+from src.MainCalculation import MainCalculation
 import pickle
-from stats import get_color_var, get_moments
+from src.stats import get_color_var, get_moments
 from sklearn.tree import DecisionTreeClassifier
 from skimage.io import imshow
 import matplotlib.pyplot as plt

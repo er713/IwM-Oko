@@ -1,9 +1,9 @@
 from enum import Enum
 
-from src.SimpleMethod import SimpleMethod
-from src.SimpleMethod2 import SimpleMethod2
-from src.Tree import Tree
-from src.KNN import KNN
+from SimpleMethod import SimpleMethod
+from SimpleMethod2 import SimpleMethod2
+from Tree import Tree
+from KNN import KNN
 
 
 class AlgorithmType(Enum):

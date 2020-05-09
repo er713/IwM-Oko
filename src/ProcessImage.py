@@ -1,5 +1,5 @@
-from src.MainCalculation import MainCalculation
-from src.AlgorithmType import AlgorithmType, constructor
+from MainCalculation import MainCalculation
+from AlgorithmType import AlgorithmType, constructor
 from PIL import Image, ImageEnhance
 import matplotlib.pyplot as plt
 from numba import jit
@@ -11,7 +11,8 @@ from skimage.filters.rank import otsu
 from skimage.color import rgb2gray
 from sklearn.metrics import accuracy_score, confusion_matrix
 from skimage.measure import moments_hu, moments_central
-from typing import Tuple
+from typing import Tuple, List
+import streamlit as st
 
 
 class ProcessImage:
@@ -55,12 +56,16 @@ class ProcessImage:
 
     @staticmethod
     # @jit(nopython=True)
-    def color_change(image: np.ndarray) -> np.ndarray:
+    def color_change(image: np.ndarray, stream: Tuple[st.empty, List[np.ndarray]], mask: np.ndarray,
+                     progress: st.progress) -> np.ndarray:
         """
         Zmiana temperatury obrazu na około 3000K (przynajmniej według programu 'darktable',
         który przy zmniejszaniu temperatury sprawia, że obraz jest bardziej niebieski, co zdaje się, że nie
         jest do końca prawidłowe). W ostateczności sprowadza się to do zmniejszenia wartości odpowiadającemu
         kolorowi czerwonemu o połowę i zwiększeniu wartości dla niebieskiego prawie 3 razy.
+        :param progress:
+        :param mask:
+        :param stream:
         :param image: przetwarzany obraz
         :return: obraz ze zmienioną temperaturą
         """
@@ -72,20 +77,27 @@ class ProcessImage:
         # pil_image.save("test.jpeg", "JPEG")
 
         res = np.zeros(image.shape, dtype=np.uint8)
-        mr, mb = 0.5, 2.991
+        mr, mb = 0.5, 2.991  # 0.5
         for i, l in enumerate(image):
             for j, v in enumerate(l):
                 r, g, b = v
-                tr = mr * r
-                tb = b * mb
-                if tb > 255:
-                    tb = 255
-                res[i, j] = (np.uint8(tr), g, np.uint8(tb))
+                if not mask[i, j]:
+                    tr = mr * r
+                    tb = b * mb
+                    if tb > 255:
+                        tb = 255
+                    res[i, j] = (np.uint8(tr), g, np.uint8(tb))
+            progress.progress((i + 1) / len(image))
+        stream[1].append(res)
+        stream[0].image(stream[1], width=300)  # , use_column_width=True)
         return res
 
     @staticmethod
-    def to_grayscale(image: np.ndarray) -> np.ndarray:
-        return rgb2gray(image)
+    def to_grayscale(image: np.ndarray, stream: Tuple[st.empty, List]) -> np.ndarray:
+        res = rgb2gray(image)
+        stream[1].append(res)
+        stream[0].image(stream[1], width=300)  # , use_column_width=True)
+        return res
 
     @staticmethod
     def get_mask(image: np.ndarray) -> np.ndarray:
@@ -102,5 +114,7 @@ class ProcessImage:
         return image[:, :, 0] < 0.12
 
     @staticmethod
-    def preprocesing(image: np.ndarray) -> np.ndarray:
-        return ProcessImage.contrast_change(ProcessImage.to_grayscale(ProcessImage.color_change(image)))
+    def preprocesing(image: np.ndarray, stream: Tuple[st.empty, List], mask: np.ndarray,
+                     progress: st.progress) -> np.ndarray:
+        return ProcessImage.contrast_change(
+            ProcessImage.to_grayscale(ProcessImage.color_change(image, stream, mask, progress), stream))

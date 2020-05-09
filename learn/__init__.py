@@ -4,10 +4,7 @@ from skimage.filters.rank import maximum, minimum
 import numpy as np
 import matplotlib.pyplot as plt
 from skimage.morphology import disk
-from learn.prepareFiles import read_data, prepare_files
-from src.ProcessImage import ProcessImage
-from src.AlgorithmType import AlgorithmType
-from src.stats import statistics
+from learn.prepareFiles import read_data  # , prepare_files
 import pickle
 import marshal
 import time

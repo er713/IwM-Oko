@@ -11,7 +11,7 @@ from tqdm import tqdm
 
 
 def make_decision_tree(n, X_train, X_test, Y_train, Y_test):
-    dt = tree.DecisionTreeClassifier(max_depth=n)
+    dt = tree.DecisionTreeClassifier(max_depth=n, criterion='entropy')
 
     print("uczenie...")
     dt.fit(X_train, Y_train)
@@ -26,7 +26,7 @@ def make_decision_tree(n, X_train, X_test, Y_train, Y_test):
     specificity = float(cm[1, 1]) / (cm[1, 0] + cm[1, 1])
     print(n, dt.get_depth(), accuracy, sensitivity, specificity)
 
-    with open("v3DT" + str(n) + ".pickle", "bw") as f:
+    with open("v4DT" + str(n) + ".pickle", "bw") as f:
         pickle.dump(dt, f)
 
 
@@ -42,17 +42,17 @@ def add_one(c, v, c0, v0):
 if __name__ == "__main__":
     c, v = get_data()
     print("dzielenie...")
-    i1 = np.sum(c)
-    v0 = []
-    c0 = []
-    for i in range(len(c)):
-        if c[i] == 0:
-            v0.append(v[i])
-            c0.append(c[i])
-            if i1 * 18 <= len(v0):
-                break
-    c0, v0 = add_one(c, v, c0, v0)
-    X_train, X_test, Y_train, Y_test = train_test_split(v0, c0, test_size=0.3)
+    # i1 = np.sum(c)
+    # v0 = []
+    # c0 = []
+    # for i in range(len(c)):
+    #     if c[i] == 0:
+    #         v0.append(v[i])
+    #         c0.append(c[i])
+    #         if i1 * 18 <= len(v0):
+    #             break
+    # c0, v0 = add_one(c, v, c0, v0)
+    X_train, X_test, Y_train, Y_test = train_test_split(v, c, test_size=0.3)
 
     make_decision_tree(None, X_train, X_test, Y_train, Y_test)
     # make_decision_tree(100, X_train, X_test, Y_train, Y_test)

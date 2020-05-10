@@ -17,7 +17,7 @@ from tqdm import tqdm
 class Tree(MainCalculation):
 
     def __init__(self):
-        with open("../learn/DTNone.pickle", "br") as f:
+        with open("../learn/v4DTNone.pickle", "br") as f:
             self.__tree: DecisionTreeClassifier = pickle.load(f)
 
     def calculate(self, image: np.ndarray, mask: np.ndarray, **kwargs) -> np.ndarray:

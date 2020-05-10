@@ -1,16 +1,12 @@
-import numpy as np
-from skimage.exposure import exposure
-from skimage.morphology import disk
-from skimage.transform import rescale, resize
-from skimage.filters import gaussian
-from skimage.filters.rank import minimum, maximum
-from MainCalculation import MainCalculation
 import pickle
-from stats import get_color_var, get_moments
+
+import numpy as np
+from MainCalculation import MainCalculation
+from skimage.exposure import exposure
+from skimage.filters import gaussian
+from skimage.transform import rescale, resize
 from sklearn.tree import DecisionTreeClassifier
-from skimage.io import imshow
-import matplotlib.pyplot as plt
-from numba import jit
+from stats import get_color_var, get_moments
 from tqdm import tqdm
 
 

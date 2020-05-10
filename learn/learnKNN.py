@@ -1,8 +1,10 @@
-from learn.prepareFiles import *
-from sklearn.metrics import accuracy_score, confusion_matrix
-from sklearn.neighbors import KNeighborsClassifier
-from sklearn.model_selection import train_test_split
 import pickle as pk
+
+from sklearn.metrics import confusion_matrix
+from sklearn.model_selection import train_test_split
+from sklearn.neighbors import KNeighborsClassifier
+
+from learn.prepareFiles import *
 
 
 def learnKNN(X_train, X_test, Y_train, Y_test, n):

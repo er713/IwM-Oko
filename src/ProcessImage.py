@@ -1,18 +1,11 @@
-from MainCalculation import MainCalculation
-from AlgorithmType import AlgorithmType, constructor
-from PIL import Image, ImageEnhance
-import matplotlib.pyplot as plt
-from numba import jit
-import numpy as np
-from skimage import exposure
-from skimage.morphology import disk
-from skimage.filters import rank, unsharp_mask, threshold_otsu
-from skimage.filters.rank import otsu
-from skimage.color import rgb2gray
-from sklearn.metrics import accuracy_score, confusion_matrix
-from skimage.measure import moments_hu, moments_central
 from typing import Tuple, List
+
+import numpy as np
 import streamlit as st
+from AlgorithmType import AlgorithmType, constructor
+from MainCalculation import MainCalculation
+from skimage import exposure
+from skimage.color import rgb2gray
 
 
 class ProcessImage:

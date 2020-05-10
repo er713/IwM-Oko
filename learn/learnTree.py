@@ -1,13 +1,12 @@
-from sklearn import tree
-from sklearn.model_selection import train_test_split
-from sklearn.metrics import confusion_matrix
-import marshal
 import pickle
+
 import numpy as np
-from numba import jit
-from typing import Iterable, Union
-from src.stats import get_data
+from sklearn import tree
+from sklearn.metrics import confusion_matrix
+from sklearn.model_selection import train_test_split
 from tqdm import tqdm
+
+from src.stats import get_data
 
 
 def make_decision_tree(n, X_train, X_test, Y_train, Y_test):

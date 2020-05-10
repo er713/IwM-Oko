@@ -1,14 +1,11 @@
-from skimage.io import imread, imshow
-from skimage.filters import gaussian
-from skimage.filters.rank import maximum, minimum
 import numpy as np
-import matplotlib.pyplot as plt
-from skimage.morphology import disk
 from learn.prepareFiles import read_data  # , prepare_files
-import pickle
 import marshal
-import time
+import marshal
 
+import numpy as np
+
+from learn.prepareFiles import read_data  # , prepare_files
 
 if __name__ == "__main__":
     # prepare_files("../../picture/", "../../masters/")

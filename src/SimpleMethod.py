@@ -1,13 +1,13 @@
-from MainCalculation import MainCalculation
-import numpy as np
-from skimage.filters.rank import otsu, minimum, maximum
-from skimage.morphology import disk
-from skimage.io import imshow
-from skimage.filters import gaussian, threshold_multiotsu, threshold_sauvola
-from skimage.filters.thresholding import _cross_entropy
-import matplotlib.pyplot as plt
 from typing import Union, Iterable
+
+import matplotlib.pyplot as plt
+import numpy as np
+from MainCalculation import MainCalculation
 from numba import jit
+from skimage.filters import gaussian, threshold_sauvola
+from skimage.filters.rank import otsu, minimum, maximum
+from skimage.io import imshow
+from skimage.morphology import disk
 
 
 class SimpleMethod(MainCalculation):

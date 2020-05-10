@@ -1,10 +1,8 @@
 import numpy as np
 from MainCalculation import MainCalculation
-from skimage.filters import laplace, meijering, sato
-from skimage.io import imshow
+from skimage.filters import meijering
 from skimage.filters.rank import maximum, minimum
 from skimage.morphology import disk
-import matplotlib.pyplot as plt
 
 
 class SimpleMethod2(MainCalculation):

@@ -1,8 +1,9 @@
-import numpy as np
-from sklearn.metrics import confusion_matrix
-from skimage.measure import moments_central, moments_hu
-from typing import Tuple
 import marshal
+from typing import Tuple
+
+import numpy as np
+from skimage.measure import moments_central, moments_hu
+from sklearn.metrics import confusion_matrix
 
 
 def statistics(image: np.ndarray, origin: np.ndarray) -> (float, float, float):

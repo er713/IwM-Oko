@@ -1,10 +1,9 @@
-import streamlit as st
-from ProcessImage import ProcessImage
-from AlgorithmType import *
-from skimage.io import imread
 from os import remove
-from typing import List
-import numpy as np
+
+import streamlit as st
+from AlgorithmType import *
+from ProcessImage import ProcessImage
+from skimage.io import imread
 
 __switch = {
     "podstawowe - Meijering": AlgorithmType.SIMPLE2, "podstawowe - progowanie Sauvola": AlgorithmType.SIMPLE,

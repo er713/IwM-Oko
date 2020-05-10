@@ -1,11 +1,10 @@
+import pickle
+
 import numpy as np
 from MainCalculation import MainCalculation
 from skimage.transform import rescale
 from sklearn.neighbors import KNeighborsClassifier
 from stats import *
-import pickle
-from skimage.io import imshow
-import matplotlib.pyplot as plt
 from tqdm import tqdm
 
 

@@ -1,10 +1,12 @@
-from src.ProcessImage import ProcessImage
-from src.AlgorithmType import AlgorithmType
-from skimage.io import imread, imsave
-from src.stats import statistics
-import numpy as np
 import os
 import re
+
+import numpy as np
+from skimage.io import imread, imsave
+
+from src.AlgorithmType import AlgorithmType
+from src.ProcessImage import ProcessImage
+from src.stats import statistics
 
 
 def get_image(path: str, name: str) -> str:

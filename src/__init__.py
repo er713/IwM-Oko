@@ -14,15 +14,15 @@ def get_image(path: str, name: str) -> str:
 
 
 if __name__ == "__main__":
-    path, file, pathb = "../../picture/", "66", "../../masters/"
+    path, file, pathb = "../../picture/", "23", "../../masters/"
     process = ProcessImage(AlgorithmType.TREE)
     image = imread(get_image(path, "color" + file))
     mask = process.get_mask(image)
-    im = process.preprocesing(image)
+    im = process.preprocesing(image, mask)
     im = process.process(im, mask, origin=image)
     # # print(im.shape, im)
     #
-    imsave("test.jpg", im)
+    imsave("wyn/tree23.jpg", im)
     # process.get_moments(im, (100, 100))
 
     tru = imread(get_image(pathb, "mst" + file))

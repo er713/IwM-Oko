@@ -19,10 +19,10 @@ class SimpleMethod(MainCalculation):
         # print(image*255 + 20)
         # imshow(image)
         # plt.show()
-        stream = kwargs["stream"]
-        progress = kwargs["progress"]
+        # stream = kwargs["stream"]
+        # progress = kwargs["progress"]
         # return self.__otsu_method(image)
-        return self.__classify(self.__sauvola_method(image, stream, progress), mask)
+        return self.__classify(self.__sauvola_method(image), mask)
 
     @staticmethod
     @jit(nopython=True)
@@ -40,12 +40,12 @@ class SimpleMethod(MainCalculation):
         return image
 
     @staticmethod
-    def __sauvola_method(image: Union[np.ndarray, Iterable, np.uint8], stream, progres) -> np.ndarray:
+    def __sauvola_method(image: Union[np.ndarray, Iterable, np.uint8]) -> np.ndarray:
         th = threshold_sauvola(image, window_size=45)
         im = image <= th
         # imshow(im, cmap='gray')
         # plt.show()
-        progres.progress(33)
+        # progres.progress(33)
         # stream[1].append(im)
         # stream[0].image(stream[1], width=300)
         # if im.shape[0] > 1000:
@@ -61,9 +61,9 @@ class SimpleMethod(MainCalculation):
         result = gaussian(im, gaus)
         # imshow(result)
         # plt.show()
-        progres.progress(66)
-        stream[1].append(result)
-        stream[0].image(stream[1], width=300)
+        # progres.progress(66)
+        # stream[1].append(result)
+        # stream[0].image(stream[1], width=300)
         # result = minimum(maximum(result, disk(5)), disk(12))
         # imshow(result)
         # plt.show()

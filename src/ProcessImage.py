@@ -56,8 +56,7 @@ class ProcessImage:
 
     @staticmethod
     # @jit(nopython=True)
-    def color_change(image: np.ndarray, stream: Tuple[st.empty, List[np.ndarray]], mask: np.ndarray,
-                     progress: st.progress) -> np.ndarray:
+    def color_change(image: np.ndarray, mask: np.ndarray) -> np.ndarray:
         """
         Zmiana temperatury obrazu na około 3000K (przynajmniej według programu 'darktable',
         który przy zmniejszaniu temperatury sprawia, że obraz jest bardziej niebieski, co zdaje się, że nie
@@ -87,16 +86,16 @@ class ProcessImage:
                     if tb > 255:
                         tb = 255
                     res[i, j] = (np.uint8(tr), g, np.uint8(tb))
-            progress.progress((i + 1) / len(image))
-        stream[1].append(res)
-        stream[0].image(stream[1], width=300)  # , use_column_width=True)
+        #     progress.progress((i + 1) / len(image))
+        # stream[1].append(res)
+        # stream[0].image(stream[1], width=300)  # , use_column_width=True)
         return res
 
     @staticmethod
-    def to_grayscale(image: np.ndarray, stream: Tuple[st.empty, List]) -> np.ndarray:
+    def to_grayscale(image: np.ndarray) -> np.ndarray:
         res = rgb2gray(image)
-        stream[1].append(res)
-        stream[0].image(stream[1], width=300)  # , use_column_width=True)
+        # stream[1].append(res)
+        # stream[0].image(stream[1], width=300)  # , use_column_width=True)
         return res
 
     @staticmethod
@@ -114,7 +113,6 @@ class ProcessImage:
         return image[:, :, 0] < 0.12
 
     @staticmethod
-    def preprocesing(image: np.ndarray, stream: Tuple[st.empty, List], mask: np.ndarray,
-                     progress: st.progress) -> np.ndarray:
+    def preprocesing(image: np.ndarray, mask: np.ndarray) -> np.ndarray:
         return ProcessImage.contrast_change(
-            ProcessImage.to_grayscale(ProcessImage.color_change(image, stream, mask, progress), stream))
+            ProcessImage.to_grayscale(ProcessImage.color_change(image, mask)))

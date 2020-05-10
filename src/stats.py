@@ -11,7 +11,7 @@ def statistics(image: np.ndarray, origin: np.ndarray) -> (float, float, float):
     accuracy = float(cm[0, 0] + cm[1, 1]) / sum(sum(cm))
     sensitivity = float(cm[0, 0]) / (cm[0, 0] + cm[0, 1])  # odwrotnie
     specificity = float(cm[1, 1]) / (cm[1, 0] + cm[1, 1])  # odwrotnie
-    return accuracy, sensitivity, specificity
+    return accuracy, sensitivity, specificity, (sensitivity + specificity) / 2
 
 
 def get_moments(image: np.ndarray, position: Tuple[int, int]):

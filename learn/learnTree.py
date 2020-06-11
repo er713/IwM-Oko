@@ -11,7 +11,7 @@ from tqdm import tqdm
 
 
 def make_decision_tree(n, X_train, X_test, Y_train, Y_test):
-    dt = tree.DecisionTreeClassifier(max_depth=n, criterion='entropy')
+    dt = tree.DecisionTreeClassifier(max_depth=n, criterion='entropy', class_weight="balanced")
 
     print("uczenie...")
     dt.fit(X_train, Y_train)

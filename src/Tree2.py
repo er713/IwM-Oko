@@ -12,10 +12,10 @@ from stats import get_color_var, get_moments
 from tqdm import tqdm
 
 
-class Tree(MainCalculation):
+class Tree2(MainCalculation):
 
     def __init__(self):
-        with open("../learn/v4DTNone.pickle", "br") as f:
+        with open("../learn/GSCV1.pickle", "br") as f:
             self.__tree: DecisionTreeClassifier = pickle.load(f)
 
     def calculate(self, image: np.ndarray, mask: np.ndarray, **kwargs) -> np.ndarray:
@@ -61,28 +61,6 @@ class Tree(MainCalculation):
                     dI += 1
         # imshow(result)
         # plt.show()
-        stream[1].append(result)
-        stream[0].image(stream[1], width=300)
-        result = gaussian(result, 2)
-        # result = maximum(minimum(result, disk(6)), disk(7))
-        # imshow(result)
-        # plt.show()
-        stream[1].append(result)
-        stream[0].image(stream[1], width=300, clamp=True)
-        # result = minimum(maximum(result, disk(5)), disk(5))
-        p2, p98 = np.percentile(result, (10, 95))
-        result = exposure.rescale_intensity(result, in_range=(p2, p98))
-        # result = gaussian(result, 2)
-        # result = self.mult(result)
-        stream[1].append(result)
-        stream[0].image(stream[1], width=300, clamp=True)
-        # imshow(result)
-        # plt.show()
-        # result = np.where(result > 0.25, 1.0, 0.0)
-        # imshow(result)
-        # plt.show()
-        # stream[1].append(result)
-        # stream[0].image(stream[1], width=300)
 
         result = resize(result, or_shape, anti_aliasing=False)
         result = np.where(result > 0.4, 1.0, 0.0)

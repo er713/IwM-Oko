@@ -4,6 +4,7 @@ from SimpleMethod import SimpleMethod
 from SimpleMethod2 import SimpleMethod2
 from Tree import Tree
 from KNN import KNN
+from Tree2 import Tree2
 
 
 class AlgorithmType(Enum):
@@ -12,6 +13,7 @@ class AlgorithmType(Enum):
     KNN = 2
     SIMPLE2 = 3
     TREE = 4
+    TREE2 = 5
 
 
 def get_none():
@@ -23,7 +25,8 @@ __switch = {
     AlgorithmType.SIMPLE: lambda: SimpleMethod(),
     AlgorithmType.KNN: lambda: KNN(),
     AlgorithmType.SIMPLE2: lambda: SimpleMethod2(),
-    AlgorithmType.TREE: lambda: Tree()
+    AlgorithmType.TREE: lambda: Tree(),
+    AlgorithmType.TREE2: lambda: Tree2()
 }
 
 

@@ -8,14 +8,15 @@ from skimage.io import imread
 __switch = {
     "podstawowe - Meijering": AlgorithmType.SIMPLE2, "podstawowe - progowanie Sauvola": AlgorithmType.SIMPLE,
     "KNN": AlgorithmType.KNN,
-    "drzewo decyzyjne": AlgorithmType.TREE
+    "drzewo decyzyjne": AlgorithmType.TREE, "drzewo decyzyjne 2": AlgorithmType.TREE2
 }
 
 if __name__ == "__main__":
     st.title("Wykrywanie naczyń dna siatkówki oka")
     algo = st.sidebar.radio("Wybierz rodzaj przetwarzania:",
                             (
-                                "podstawowe - Meijering", "podstawowe - progowanie Sauvola", "drzewo decyzyjne"))
+                                "podstawowe - Meijering", "podstawowe - progowanie Sauvola", "drzewo decyzyjne",
+                                "drzewo decyzyjne 2"))
     # st.sidebar.write("Opcje")
     extension = "jpg"  # st.sidebar.radio("Wybierz rozszerzenie pliku:", ("jpg", "png", "ppm"))
 
